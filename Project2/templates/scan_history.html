@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Scan History{% endblock %}
+
+{% block content %}
+    <h1>Scan History</h1>
+    {% if scan_results %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Scan Type</th>
+                    <th>Target</th>
+                    <th>Results</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in scan_results %}
+                    <tr>
+                        <td>{{ result.scan_type }}</td>
+                        <td>{{ result.target }}</td>
+                        <td><pre>{{ result.results }}</pre></td>
+                        <td>{{ result.scan_date }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No scan history found.</p>
+    {% endif %}
+{% endblock %}

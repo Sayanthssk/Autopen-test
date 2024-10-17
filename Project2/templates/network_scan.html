@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Network Scan{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Network Scan</h1>
+    <form method="post">
+        <div class="form-group">
+            <label for="network_range">Network Range:</label>
+            <input type="text" id="network_range" name="network_range" class="form-control" placeholder="e.g., 192.168.1.0/24" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Scan Network</button>
+    </form>
+    {% if scan_results %}
+        <h2>Scapy Scan Results:</h2>
+        <ul class="list-group">
+            {% for device in scan_results.scapy %}
+                <li class="list-group-item">IP: {{ device.ip }}, MAC: {{ device.mac }}</li>
+            {% endfor %}
+        </ul>
+        <h2>Nmap Scan Results:</h2>
+        <ul class="list-group">
+            {% if scan_results.nmap %}
+                {% for device in scan_results.nmap %}
+                    <li class="list-group-item">IP: {{ device[0] if device[0] else 'N/A' }}, MAC: {{ device[1] if device[1] else 'N/A' }}</li>
+                {% endfor %}
+            {% else %}
+                <li class="list-group-item">No hosts found.</li>
+            {% endif %}
+        </ul>
+    {% endif %}
+</div>
+{% endblock %}

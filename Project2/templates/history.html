@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Scan History{% endblock %}
+
+{% block content %}
+    <h1>Scan History</h1>
+    <ul class="list-group">
+        {% for result in scan_results %}
+            <li class="list-group-item">
+                <strong>Type:</strong> {{ result.scan_type }}<br>
+                <strong>Target:</strong> {{ result.target }}<br>
+                <strong>Date:</strong> {{ result.scan_date }}<br>
+                <strong>Results:</strong> <pre>{{ result.results }}</pre>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
